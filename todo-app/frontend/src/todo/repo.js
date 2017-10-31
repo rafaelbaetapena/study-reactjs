@@ -31,8 +31,10 @@ class Repo {
     }
 
     get(description) {
-        console.log(description)
-        return this.listRepository
+        return this.listRepository.filter((v) => {
+            let expr = / /         
+            return v.description.match(expr)
+        })
     }
 
     add(description){
