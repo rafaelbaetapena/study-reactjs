@@ -4,7 +4,25 @@ class Repo {
     constructor(){
         this.listRepository = [{
             _id: Guid.raw(),
-            description: "Teste 123",
+            description: "Teste 1",
+            __v: 0,
+            createdAt: Date.now(),
+            done: false
+        },{
+            _id: Guid.raw(),
+            description: "Teste 2",
+            __v: 0,
+            createdAt: Date.now(),
+            done: false
+        },{
+            _id: Guid.raw(),
+            description: "Teste 3",
+            __v: 0,
+            createdAt: Date.now(),
+            done: false
+        },{
+            _id: Guid.raw(),
+            description: "Teste 4",
             __v: 0,
             createdAt: Date.now(),
             done: false
@@ -12,7 +30,8 @@ class Repo {
 
     }
 
-    get() {
+    get(description) {
+        console.log(description)
         return this.listRepository
     }
 
