@@ -31,10 +31,11 @@ class Repo {
     }
 
     get(description) {
-        return this.listRepository.filter((v) => {
-            let expr = / /         
-            return v.description.match(expr)
-        })
+        return this.listRepository
+        // return this.listRepository.filter((v) => {
+        //     //let expr = / /         
+        //     return v.description.match(expr)
+        // })
     }
 
     add(description){
