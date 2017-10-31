@@ -1,20 +1,12 @@
 import React, { Component } from 'react'
 //import axios from 'axios'
-import Guid from '../../node_modules/guid/guid'
 
 import PageHeader from '../template/pageHeader'
 import TodoForm from './todoForm'
 import TodoList from './todoList'
+import Repo from './repo'
 
 //const URL = 'http://localhost:3003/api/todos'
-
-var listRepository = [{
-    _id: Guid.raw(),
-    description: "Teste 123",
-    __v: 0,
-    createdAt: Date.now(),
-    done: false
-}]
 
 export default class Todo extends Component {
     constructor(props){
@@ -36,11 +28,11 @@ export default class Todo extends Component {
     }
 
     refresh() {
-        const list = this.state.list
+         const list = Repo.get()
         this.setState({
             ...this.state,
             description: '',
-            list: listRepository
+            list: list
         })
         // axios.get(`${URL}?sort=-createdAt`)
         //     .then(resp => this.setState({
@@ -56,13 +48,7 @@ export default class Todo extends Component {
 
     handleAdd() {
         const description = this.state.description    
-        listRepository.push({
-            _id: Guid.raw(),
-            description: description,
-            __v: 0,
-            createdAt: Date.now(),
-            done: false 
-        })
+        Repo.add(description)
         this.refresh()
 
         // axios.post(URL, { description })
@@ -70,23 +56,14 @@ export default class Todo extends Component {
     }
 
     handleRemove(todo) {
-        var index = listRepository.indexOf(todo);
-        if (index > -1) {
-            listRepository.splice(index, 1);
-        }
+        Repo.remove(todo)
         this.refresh()
         // axios.delete(`${URL}/${todo._id}`)
         //     .then(resp => this.refresh())
     }
 
     handleMarkAsDone(todo){
-        var index = listRepository.indexOf(todo);
-        if (index > -1) {
-            listRepository[index] = {
-                ...todo,
-                done: true
-            };
-        }
+        Repo.done(todo)    
         this.refresh()
 
         // axios.put(`${URL}/${todo._id}`, {
@@ -96,13 +73,7 @@ export default class Todo extends Component {
     }
 
     handleMarkAsPending(todo){
-        var index = listRepository.indexOf(todo);
-        if (index > -1) {
-            listRepository[index] = {
-                ...todo,
-                done: false
-            };
-        }
+        Repo.pending(todo)
         this.refresh()
         // axios.put(`${URL}/${todo._id}`, {
         //     ...todo, done: false
