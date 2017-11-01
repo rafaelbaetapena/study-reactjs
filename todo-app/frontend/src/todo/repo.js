@@ -8,25 +8,27 @@ class Repo {
             __v: 0,
             createdAt: Date.now(),
             done: false
-        },{
-            _id: Guid.raw(),
-            description: "Teste 2",
-            __v: 0,
-            createdAt: Date.now(),
-            done: false
-        },{
-            _id: Guid.raw(),
-            description: "Teste 3",
-            __v: 0,
-            createdAt: Date.now(),
-            done: false
-        },{
-            _id: Guid.raw(),
-            description: "Teste 4",
-            __v: 0,
-            createdAt: Date.now(),
-            done: false
-        }]
+        },
+        // {
+        //     _id: Guid.raw(),
+        //     description: "Teste 2",
+        //     __v: 0,
+        //     createdAt: Date.now(),
+        //     done: false
+        // },{
+        //     _id: Guid.raw(),
+        //     description: "Teste 3",
+        //     __v: 0,
+        //     createdAt: Date.now(),
+        //     done: false
+        // },{
+        //     _id: Guid.raw(),
+        //     description: "Teste 4",
+        //     __v: 0,
+        //     createdAt: Date.now(),
+        //     done: false
+        // }
+    ]
 
     }
 

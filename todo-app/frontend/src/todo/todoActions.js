@@ -21,15 +21,30 @@ export const search = () => {
     // }
 }
 
+// export const add = (description) => {
+//     Repo.add(description)
+//     return [
+//         { type: 'TODO_ADDED', payload: description },
+//         search()
+//     ]
+//     // const request = axios.post(URL, { description })
+//     // return {
+//     //     type: 'TODO_ADDED',
+//     //     payload: request
+//     // }
+// }
+
 export const add = (description) => {
-    Repo.add(description)
-    return {
-        type: 'TODO_ADDED',
-        payload: description
+
+    return dispatch => {
+        new Promise ((resolve, reject) => resolve(Repo.add(description)))
+            .then(resp => dispatch({ type: 'TODO_ADDED', payload: description }))
+            .then(resp => dispatch(search()))
     }
-    // const request = axios.post(URL, { description })
-    // return {
-    //     type: 'TODO_ADDED',
-    //     payload: request
+    
+    // return dispatch => {
+    //     axios.post(URL, { description })
+    //         .then(resp => dispatch({ type: 'TODO_ADDED', payload: resp.data }))
+    //         .then(resp => dispatch(search()))
     // }
 }

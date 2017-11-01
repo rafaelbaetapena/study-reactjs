@@ -97,7 +97,6 @@ export default class Todo extends Component {
             <div>
                 <PageHeader name="Tarefas" small="Cadastro"></PageHeader>
                 <TodoForm 
-                    description={this.state.description}
                     handleAdd={this.handleAdd}
                     handleChange={this.handleChange}
                     handleSearch={this.handleSearch}
