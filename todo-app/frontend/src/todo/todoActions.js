@@ -20,3 +20,16 @@ export const search = () => {
     //     payload: request
     // }
 }
+
+export const add = (description) => {
+    Repo.add(description)
+    return {
+        type: 'TODO_ADDED',
+        payload: description
+    }
+    // const request = axios.post(URL, { description })
+    // return {
+    //     type: 'TODO_ADDED',
+    //     payload: request
+    // }
+}
