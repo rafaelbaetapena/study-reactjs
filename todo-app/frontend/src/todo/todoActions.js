@@ -9,9 +9,14 @@ export const changeDescription = event => ({
 })
 
 export const search = () => {
-    const request = axios.get(`${URL}?sort=-createdAt`)
+    const list = Repo.get()    
     return {
         type: 'TODO_SEARCHED',
-        payload: request
+        payload: list
     }
+    // const request = axios.get(`${URL}?sort=-createdAt`)
+    // return {
+    //     type: 'TODO_SEARCHED',
+    //     payload: request
+    // }
 }
