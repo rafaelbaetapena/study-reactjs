@@ -21,19 +21,6 @@ export const search = () => {
     // }
 }
 
-// export const add = (description) => {
-//     Repo.add(description)
-//     return [
-//         { type: 'TODO_ADDED', payload: description },
-//         search()
-//     ]
-//     // const request = axios.post(URL, { description })
-//     // return {
-//     //     type: 'TODO_ADDED',
-//     //     payload: request
-//     // }
-// }
-
 export const add = (description) => {
 
     return dispatch => {
@@ -48,3 +35,31 @@ export const add = (description) => {
     //         .then(resp => dispatch(search()))
     // }
 }
+
+export const markAsDone = (todo) => {
+
+    return dispatch => {
+        new Promise ((resolve, reject) => resolve(Repo.done(todo)))
+            .then(resp => dispatch({ type: 'TODO_MARKED_AS_DONE', payload: {...todo, done: true} }))
+            .then(resp => dispatch(search()))
+    }
+
+    // return dispatch => {
+    //     axios.put(`${URL}/${todo._id}`, { ...todo, done: true})
+    //         .then(resp => dispatch({type: 'TODO_MARKED_AS_DONE', payload: resp.data}))
+    //         .then(resp => dispatch(search()))
+    // }
+}
+
+export const markAsPending = (todo) => {
+    
+        return dispatch => {
+            new Promise ((resolve, reject) => resolve(Repo.pending(todo)))
+                .then(resp => dispatch(search()))
+        }
+    
+        // return dispatch => {
+        //     axios.put(`${URL}/${todo._id}`, { ...todo, done: false})
+        //         .then(resp => dispatch(search()))
+        // }
+    }
