@@ -9,7 +9,7 @@ export const changeDescription = event => ({
 })
 
 export const search = () => {
-    const list = Repo.get()    
+    const list = Repo.get()
     return {
         type: 'TODO_SEARCHED',
         payload: list
@@ -24,11 +24,11 @@ export const search = () => {
 export const add = (description) => {
 
     return dispatch => {
-        new Promise ((resolve, reject) => resolve(Repo.add(description)))
+        new Promise((resolve, reject) => resolve(Repo.add(description)))
             .then(resp => dispatch({ type: 'TODO_ADDED', payload: description }))
             .then(resp => dispatch(search()))
     }
-    
+
     // return dispatch => {
     //     axios.post(URL, { description })
     //         .then(resp => dispatch({ type: 'TODO_ADDED', payload: resp.data }))
@@ -39,8 +39,8 @@ export const add = (description) => {
 export const markAsDone = (todo) => {
 
     return dispatch => {
-        new Promise ((resolve, reject) => resolve(Repo.done(todo)))
-            .then(resp => dispatch({ type: 'TODO_MARKED_AS_DONE', payload: {...todo, done: true} }))
+        new Promise((resolve, reject) => resolve(Repo.done(todo)))
+            .then(resp => dispatch({ type: 'TODO_MARKED_AS_DONE', payload: { ...todo, done: true } }))
             .then(resp => dispatch(search()))
     }
 
@@ -52,14 +52,27 @@ export const markAsDone = (todo) => {
 }
 
 export const markAsPending = (todo) => {
+
+    return dispatch => {
+        new Promise((resolve, reject) => resolve(Repo.pending(todo)))
+            .then(resp => dispatch(search()))
+    }
+
+    // return dispatch => {
+    //     axios.put(`${URL}/${todo._id}`, { ...todo, done: false})
+    //         .then(resp => dispatch(search()))
+    // }
+}
+
+export const remove = (todo) => {
     
         return dispatch => {
-            new Promise ((resolve, reject) => resolve(Repo.pending(todo)))
+            new Promise((resolve, reject) => resolve(Repo.remove(todo)))
                 .then(resp => dispatch(search()))
         }
     
         // return dispatch => {
-        //     axios.put(`${URL}/${todo._id}`, { ...todo, done: false})
+        //     axios.delete(`${URL}/${todo._id}`)
         //         .then(resp => dispatch(search()))
         // }
     }
