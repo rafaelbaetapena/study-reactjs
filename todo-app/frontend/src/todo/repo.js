@@ -1,7 +1,7 @@
 import Guid from '../../node_modules/guid/guid'
 
 class Repo {
-    constructor(){
+    constructor() {
         this.listRepository = [{
             _id: Guid.raw(),
             description: "Teste 1",
@@ -9,38 +9,39 @@ class Repo {
             createdAt: Date.now(),
             done: false
         },
-        // {
-        //     _id: Guid.raw(),
-        //     description: "Teste 2",
-        //     __v: 0,
-        //     createdAt: Date.now(),
-        //     done: false
-        // },{
-        //     _id: Guid.raw(),
-        //     description: "Teste 3",
-        //     __v: 0,
-        //     createdAt: Date.now(),
-        //     done: false
-        // },{
-        //     _id: Guid.raw(),
-        //     description: "Teste 4",
-        //     __v: 0,
-        //     createdAt: Date.now(),
-        //     done: false
-        // }
-    ]
+        {
+            _id: Guid.raw(),
+            description: "teste 123",
+            __v: 0,
+            createdAt: Date.now(),
+            done: false
+        },
+        //{
+            //     _id: Guid.raw(),
+            //     description: "Teste 3",
+            //     __v: 0,
+            //     createdAt: Date.now(),
+            //     done: false
+            // },{
+            //     _id: Guid.raw(),
+            //     description: "Teste 4",
+            //     __v: 0,
+            //     createdAt: Date.now(),
+            //     done: false
+            // }
+        ]
 
     }
 
     get(description) {
-        return [...this.listRepository]
-        // return this.listRepository.filter((v) => {
-        //     //let expr = / /         
-        //     return v.description.match(expr)
-        // })
+        let pattern = new RegExp(description,"gi")
+        let newList = [...this.listRepository]
+        return [...newList.filter((v) => {
+            return v.description.match(pattern)
+        })]
     }
 
-    add(description){
+    add(description) {
         let newList = [...this.listRepository]
 
         newList.push({
@@ -48,13 +49,13 @@ class Repo {
             description: description,
             __v: 0,
             createdAt: Date.now(),
-            done: false 
+            done: false
         })
 
         this.listRepository = [...newList]
     }
 
-    remove(todo){
+    remove(todo) {
         let newList = [...this.listRepository]
 
         let index = newList.indexOf(todo);
@@ -63,11 +64,11 @@ class Repo {
         this.listRepository = [...newList]
     }
 
-    done(todo){
+    done(todo) {
         let newList = [...this.listRepository]
 
         let index = newList.indexOf(todo);
-        if (index > -1) 
+        if (index > -1)
             newList[index] = {
                 ...todo,
                 done: true
@@ -76,11 +77,11 @@ class Repo {
         this.listRepository = [...newList]
     }
 
-    pending(todo){
+    pending(todo) {
         let newList = [...this.listRepository]
 
         let index = newList.indexOf(todo);
-        if (index > -1) 
+        if (index > -1)
             newList[index] = {
                 ...todo,
                 done: false

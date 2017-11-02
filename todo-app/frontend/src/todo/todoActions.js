@@ -9,11 +9,12 @@ export const changeDescription = event => ({
 })
 
 export const search = () => {
-    const list = Repo.get()
-    return {
-        type: 'TODO_SEARCHED',
-        payload: list
+    return (dispatch, getState) => {
+        const description = getState().todo.description
+        new Promise((resolve, reject) => resolve(Repo.get(description)))
+            .then(resp => dispatch({ type: 'TODO_SEARCHED', payload: resp }))
     }
+
     // const request = axios.get(`${URL}?sort=-createdAt`)
     // return {
     //     type: 'TODO_SEARCHED',
@@ -78,5 +79,5 @@ export const remove = (todo) => {
 }
 
 export const clear = () => {
-    return { type: 'TODO_CLEAR' }
+    return [{ type: 'TODO_CLEAR' }, search()]
 }
