@@ -33,7 +33,7 @@ class Repo {
     }
 
     get(description) {
-        return this.listRepository
+        return [...this.listRepository]
         // return this.listRepository.filter((v) => {
         //     //let expr = / /         
         //     return v.description.match(expr)
@@ -41,40 +41,52 @@ class Repo {
     }
 
     add(description){
-        this.listRepository.push({
+        let newList = [...this.listRepository]
+
+        newList.push({
             _id: Guid.raw(),
             description: description,
             __v: 0,
             createdAt: Date.now(),
             done: false 
         })
+
+        this.listRepository = [...newList]
     }
 
     remove(todo){
-        let index = this.listRepository.indexOf(todo);
-        if (index > -1) {
-            this.listRepository.splice(index, 1);
-        }
+        let newList = [...this.listRepository]
+
+        let index = newList.indexOf(todo);
+        if (index > -1) newList.splice(index, 1);
+
+        this.listRepository = [...newList]
     }
 
     done(todo){
-        let index = this.listRepository.indexOf(todo);
-        if (index > -1) {
-            this.listRepository[index] = {
+        let newList = [...this.listRepository]
+
+        let index = newList.indexOf(todo);
+        if (index > -1) 
+            newList[index] = {
                 ...todo,
                 done: true
-            };
-        }
+            }
+
+        this.listRepository = [...newList]
     }
 
     pending(todo){
-        let index = this.listRepository.indexOf(todo);
-        if (index > -1) {
-            this.listRepository[index] = {
+        let newList = [...this.listRepository]
+
+        let index = newList.indexOf(todo);
+        if (index > -1) 
+            newList[index] = {
                 ...todo,
                 done: false
-            };
-        }
+            }
+
+        this.listRepository = [...newList]
     }
 }
 
