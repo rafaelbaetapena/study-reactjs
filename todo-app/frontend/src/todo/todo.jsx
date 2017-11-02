@@ -9,23 +9,23 @@ import Repo from './repo'
 //const URL = 'http://localhost:3003/api/todos'
 
 export default class Todo extends Component {
-    constructor(props){
+    constructor(props) {
         super(props)
-        this.state = { 
-            description: '', 
+        this.state = {
+            description: '',
             list: [],
         }
 
         this.handleAdd = this.handleAdd.bind(this)
-        this.handleChange = this.handleChange.bind(this)   
-        this.handleRemove = this.handleRemove.bind(this) 
+        this.handleChange = this.handleChange.bind(this)
+        this.handleRemove = this.handleRemove.bind(this)
         this.handleMarkAsDone = this.handleMarkAsDone.bind(this)
-        this.handleMarkAsPending = this.handleMarkAsPending.bind(this)    
+        this.handleMarkAsPending = this.handleMarkAsPending.bind(this)
         this.handleSearch = this.handleSearch.bind(this)
         this.handleClear = this.handleClear.bind(this)
     }
 
-    componentDidMount(){        
+    componentDidMount() {
         this.refresh()
     }
 
@@ -46,11 +46,11 @@ export default class Todo extends Component {
     }
 
     handleChange(e) {
-        this.setState({...this.state, description: e.target.value })
+        this.setState({ ...this.state, description: e.target.value })
     }
 
     handleAdd() {
-        const description = this.state.description    
+        const description = this.state.description
         Repo.add(description)
         this.refresh()
 
@@ -65,8 +65,8 @@ export default class Todo extends Component {
         //     .then(resp => this.refresh())
     }
 
-    handleMarkAsDone(todo){
-        Repo.done(todo)    
+    handleMarkAsDone(todo) {
+        Repo.done(todo)
         this.refresh(this.state.description)
 
         // axios.put(`${URL}/${todo._id}`, {
@@ -75,7 +75,7 @@ export default class Todo extends Component {
         // .then(resp => this.refresh())
     }
 
-    handleMarkAsPending(todo){
+    handleMarkAsPending(todo) {
         Repo.pending(todo)
         this.refresh(this.state.description)
         // axios.put(`${URL}/${todo._id}`, {
@@ -84,27 +84,27 @@ export default class Todo extends Component {
         // .then(resp => this.refresh())
     }
 
-    handleSearch(){
+    handleSearch() {
         this.refresh(this.state.description)
     }
 
-    handleClear(){
+    handleClear() {
         this.refresh()
     }
 
-    render(){
+    render() {
         return (
             <div>
                 <PageHeader name="Tarefas" small="Cadastro"></PageHeader>
-                <TodoForm 
+                <TodoForm
                     handleAdd={this.handleAdd}
                     handleChange={this.handleChange}
                     handleSearch={this.handleSearch}
                     handleClear={this.handleClear} />
-                <TodoList 
+                <TodoList
                     handleRemove={this.handleRemove}
                     handleMarkAsDone={this.handleMarkAsDone}
-                    handleMarkAsPending={this.handleMarkAsPending}  />
+                    handleMarkAsPending={this.handleMarkAsPending} />
             </div>
         )
     }

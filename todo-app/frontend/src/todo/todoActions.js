@@ -25,7 +25,7 @@ export const add = (description) => {
 
     return dispatch => {
         new Promise((resolve, reject) => resolve(Repo.add(description)))
-            .then(resp => dispatch({ type: 'TODO_ADDED', payload: description }))
+            .then(resp => dispatch(clear()))
             .then(resp => dispatch(search()))
     }
 
@@ -65,14 +65,18 @@ export const markAsPending = (todo) => {
 }
 
 export const remove = (todo) => {
-    
-        return dispatch => {
-            new Promise((resolve, reject) => resolve(Repo.remove(todo)))
-                .then(resp => dispatch(search()))
-        }
-    
-        // return dispatch => {
-        //     axios.delete(`${URL}/${todo._id}`)
-        //         .then(resp => dispatch(search()))
-        // }
+
+    return dispatch => {
+        new Promise((resolve, reject) => resolve(Repo.remove(todo)))
+            .then(resp => dispatch(search()))
     }
+
+    // return dispatch => {
+    //     axios.delete(`${URL}/${todo._id}`)
+    //         .then(resp => dispatch(search()))
+    // }
+}
+
+export const clear = () => {
+    return { type: 'TODO_CLEAR' }
+}

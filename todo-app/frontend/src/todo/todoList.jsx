@@ -6,7 +6,7 @@ import IconButton from '../template/iconButton'
 import { markAsDone, markAsPending, remove } from './todoActions'
 
 const TodoList = props => {
-    
+
     const renderRows = () => {
         const list = props.list || []
         return list.map(todo => (
@@ -23,7 +23,7 @@ const TodoList = props => {
             </tr>
         ))
     }
-    
+
     return (
         <table className="table">
             <thead>
