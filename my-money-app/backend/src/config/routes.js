@@ -1,6 +1,6 @@
 const express = require('express')
 
-modeule.exports = function (server) {
+module.exports = function (server) {
 
     // definir url base para todas as rotas
     const router = express.Router()
